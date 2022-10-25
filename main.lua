@@ -26,6 +26,12 @@ function love.load()
   
   Jump = love.audio.newSource("jump.wav", "static")
   Dead = love.audio.newSource("dead.wav", "static")
+  
+  MenuMusic = love.audio.newSource("menu.mp3", "stream")
+  MenuMusic:setLooping(true)
+  gameMusic = love.audio.newSource("game.mp3", "stream")
+  gameMusic:setLooping(true)
+  
   BirdSprite = BirdDown
   love.graphics.setBackgroundColor(.45, .75, 80, 1)
     
@@ -86,6 +92,18 @@ function love.load()
 end
 
 function love.update(dt)
+ -- Audio
+ 
+ if inGame == true then
+   love.audio.play(gameMusic)
+   love.audio.stop(MenuMusic)
+ else
+   love.audio.play(MenuMusic)
+   love.audio.stop(gameMusic)
+   end
+ 
+ 
+ 
  -- Pipe Update
      if inGame == true and inPause == false and win == false then
           -- Pipe 1
