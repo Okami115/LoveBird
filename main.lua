@@ -5,6 +5,7 @@ function love.load()
   Menu = love.graphics.newImage("Menu.png")
   Pause = love.graphics.newImage("pause.png")
   Win = love.graphics.newImage("win.png")
+  HowToPlay = love.graphics.newImage("HowToPlay.png")
   
   BirdDown = love.graphics.newImage("Bird Down.png")
   BirdUp = love.graphics.newImage("Bird Up.png")
@@ -356,6 +357,7 @@ function love.draw()
   -- Ground
   love.graphics.setColor(.85, .85, .55, 1)
   love.graphics.rectangle("fill", 0, 550, 915,60)
+  love.graphics.draw(HowToPlay, 0, 550 )
   love.graphics.setColor(.45, .75, .18, 1)
   love.graphics.rectangle("fill", 0, 540, 915,15)
   
