@@ -79,7 +79,7 @@ function love.load()
   
   -- Pipe 5
   topSpace5 = 700
-  pipe5X = WindowWidth - 55 + 5
+  pipe5X = WindowWidth - 55 + 5000
   Pipe5Height = 700
 
   -- Bird
@@ -387,19 +387,19 @@ function love.draw()
   
   if win == true and inGame == true and inPause == false then
     
-    love.graphics.draw(Win, 150,150 )
+    love.graphics.draw(Win, 200,150 )
     
   end
   
   if inPause == true and inGame == true and win == false then 
     
-    love.graphics.draw(Pause, 150,150 )
+    love.graphics.draw(Pause, 200,150 )
     
   end
   
   if inGame == false then
     
-    love.graphics.draw(Menu, -100, 0)
+    love.graphics.draw(Menu, 0, 0)
     
   end
   
