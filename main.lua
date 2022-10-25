@@ -7,7 +7,9 @@ function love.load()
   Win = love.graphics.newImage("win.png")
   BirdDown = love.graphics.newImage("Bird Down.png")
   BirdUp = love.graphics.newImage("Bird Up.png")
-  BirdSprite = BirdUp
+  Jump = love.audio.newSource("jump.wav", "static")
+  Dead = love.audio.newSource("dead.wav", "static")
+  BirdSprite = BirdDown
   love.graphics.setBackgroundColor(.45, .75, 80, 1)
     
   inGame = false
@@ -99,7 +101,6 @@ function love.update(dt)
       -- Pipe 5
       pipe5X = pipe5X - 100 * dt
      
-     
      -- checkColliders
      
      -- Colider Pipe 1
@@ -108,6 +109,7 @@ function love.update(dt)
         PipesYA < BirdPosY + BirdHeight and
         Pipe1AHeight + PipesYA > BirdPosY then
           
+            Dead:play()
             BirdPosY = WindowWidth / 4
             pipe1X = WindowWidth - 55
             pipe2X = WindowWidth - 55 + 300
@@ -122,6 +124,7 @@ function love.update(dt)
         Pipe1YB < BirdPosY + BirdHeight and
         Pipe1BHeight + Pipe1YB > BirdPosY then
           
+          Dead:play()
             BirdPosY = WindowWidth / 4
             pipe1X = WindowWidth - 55
             pipe2X = WindowWidth - 55 + 300
@@ -138,6 +141,7 @@ function love.update(dt)
         PipesYA < BirdPosY + BirdHeight and
         Pipe2AHeight + PipesYA > BirdPosY then
           
+          Dead:play()
             BirdPosY = WindowWidth / 4
             pipe1X = WindowWidth - 55
             pipe2X = WindowWidth - 55 + 300
@@ -148,11 +152,11 @@ function love.update(dt)
         end
      
       if pipe2X < BirdPosX + BirdWidth and
-
         pipe2X + PipesWidth > BirdPosX and
         Pipe2YB < BirdPosY + BirdHeight and
         Pipe2BHeight + Pipe2YB > BirdPosY then
           
+            Dead:play()
             BirdPosY = WindowWidth / 4
             pipe1X = WindowWidth - 55
             pipe2X = WindowWidth - 55 + 300
@@ -169,6 +173,8 @@ function love.update(dt)
         PipesYA < BirdPosY + BirdHeight and
         Pipe3AHeight + PipesYA > BirdPosY then
           
+          
+            Dead:play()
             BirdPosY = WindowWidth / 4
             pipe1X = WindowWidth - 55
             pipe2X = WindowWidth - 55 + 300
@@ -183,6 +189,7 @@ function love.update(dt)
         Pipe3YB < BirdPosY + BirdHeight and
         Pipe3BHeight + Pipe3YB > BirdPosY then
           
+            Dead:play()
             BirdPosY = WindowWidth / 4
             pipe1X = WindowWidth - 55
             pipe2X = WindowWidth - 55 + 300
@@ -199,6 +206,7 @@ function love.update(dt)
         PipesYA < BirdPosY + BirdHeight and
         Pipe4AHeight + PipesYA > BirdPosY then
           
+            Dead:play()
             BirdPosY = WindowWidth / 4
             pipe1X = WindowWidth - 55
             pipe2X = WindowWidth - 55 + 300
@@ -213,6 +221,7 @@ function love.update(dt)
         Pipe4YB < BirdPosY + BirdHeight and
         Pipe4BHeight + Pipe4YB > BirdPosY then
           
+            Dead:play()
             BirdPosY = WindowWidth / 4
             pipe1X = WindowWidth - 55
             pipe2X = WindowWidth - 55 + 300
@@ -244,12 +253,14 @@ function love.update(dt)
             0 + 915 > BirdPosX and
             550 < BirdPosY + BirdHeight and
             60 + 550 > BirdPosY then
-     
+            
+            Dead:play()
             BirdPosY = WindowWidth / 4
             pipe1X = WindowWidth - 55
             pipe2X = WindowWidth - 55 + 300
             pipe3X = WindowWidth - 55 + 600
             pipe4X = WindowWidth - 55 + 900
+            pipe5X = WindowWidth - 55 + 5000
             gravity = 512
      
     end
@@ -257,14 +268,16 @@ function love.update(dt)
      -- Bird Update
       gravity = gravity + 500 * dt
       BirdPosY = BirdPosY + gravity * dt
-      BirdSprite = BirdDown
-       end
+        if gravity > 0 then
+        BirdSprite = BirdDown
+        end
+    end
 
 end
 
 function love.keypressed(key)
    
-   if key == "p" then
+  if key == "p" then
      
      if inPause == true then
       inPause = false
@@ -273,11 +286,11 @@ function love.keypressed(key)
       end
    end
    
-    if key == "escape" and inGame == false then
+  if key == "escape" and inGame == false then
           love.event.quit()
      end
    
-   if key == "escape" then
+  if key == "escape" then
      
      inGame = false
      
@@ -286,12 +299,13 @@ function love.keypressed(key)
    end
 
    
-   if BirdPosY > 0 then
+  if BirdPosY > 0 then
     gravity = -200
+    Jump:play()
     BirdSprite = BirdUp
     end
     
-       if win == true then
+  if win == true then
      
      inGame = false
      win = false
