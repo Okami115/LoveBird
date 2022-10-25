@@ -5,8 +5,25 @@ function love.load()
   Menu = love.graphics.newImage("Menu.png")
   Pause = love.graphics.newImage("pause.png")
   Win = love.graphics.newImage("win.png")
+  
   BirdDown = love.graphics.newImage("Bird Down.png")
   BirdUp = love.graphics.newImage("Bird Up.png")
+  
+  Pipe1A = love.graphics.newImage("pipe1A.png")
+  Pipe1B = love.graphics.newImage("pipe1B.png")
+  
+  Pipe2A = love.graphics.newImage("pipe2A.png")
+  Pipe2B = love.graphics.newImage("pipe2B.png")
+  
+  Pipe3A = love.graphics.newImage("pipe3A.png")
+  Pipe3B = love.graphics.newImage("pipe3B.png")
+  
+  Pipe4A = love.graphics.newImage("pipe4A.png")
+  Pipe4B = love.graphics.newImage("pipe4B.png")
+  
+  Pipe5 = love.graphics.newImage("pipe5.png")
+
+  
   Jump = love.audio.newSource("jump.wav", "static")
   Dead = love.audio.newSource("dead.wav", "static")
   BirdSprite = BirdDown
@@ -16,8 +33,8 @@ function love.load()
   win = false
   inPause = false
     
-  WindowWidth = love.graphics.getWidth()
-  WindowHeight = love.graphics.getHeight()
+  WindowWidth = love.graphics.getWidth() --800
+  WindowHeight = love.graphics.getHeight() --600
   
   PipesYA = 0
   PipesWidth = 55
@@ -325,50 +342,45 @@ function love.draw()
   love.graphics.rectangle("fill", 0, 540, 915,15)
   
   
-  love.graphics.setColor(.20, 1, 0, 1)
-  
   -- Pipe 1 
-  love.graphics.rectangle("fill", pipe1X, PipesYA, PipesWidth, Pipe1AHeight)
-  love.graphics.rectangle("fill", pipe1X, Pipe1YB, PipesWidth, Pipe1BHeight)
+  love.graphics.setColor(1, 1, 1, 1)
+  love.graphics.draw(Pipe1A, pipe1X, PipeYA )
+  love.graphics.draw(Pipe1B, pipe1X, Pipe1YB )
   
   -- Pipe 2
-  love.graphics.rectangle("fill", pipe2X, PipesYA, PipesWidth, Pipe2AHeight)
-  love.graphics.rectangle("fill", pipe2X, Pipe2YB, PipesWidth, Pipe2BHeight)
+  love.graphics.draw(Pipe2A, pipe2X, PipeYA )
+  love.graphics.draw(Pipe2B, pipe2X, Pipe2YB )
   
   -- Pipe 3
-  love.graphics.rectangle("fill", pipe3X, PipesYA, PipesWidth, Pipe3AHeight)
-  love.graphics.rectangle("fill", pipe3X, Pipe3YB, PipesWidth, Pipe3BHeight)
+  love.graphics.draw(Pipe3A, pipe3X, PipeYA )
+  love.graphics.draw(Pipe3B, pipe3X, Pipe3YB )
   
   -- Pipe 4
-  love.graphics.rectangle("fill", pipe4X, PipesYA, PipesWidth, Pipe4AHeight)
-  love.graphics.rectangle("fill", pipe4X, Pipe4YB, PipesWidth, Pipe4BHeight)
+  love.graphics.draw(Pipe4A, pipe4X, PipeYA )
+  love.graphics.draw(Pipe4B, pipe4X, Pipe4YB )
   
   -- Pipe 5
-  love.graphics.setColor(1, 1, 1, 1)
-  love.graphics.rectangle("fill", pipe5X, PipesYA, PipesWidth, Pipe5Height)
+  love.graphics.draw(Pipe5, pipe5X, PipeYA )
   
   -- Bird
-  love.graphics.setColor(1, 1, 1, 1)
   love.graphics.draw(BirdSprite, BirdPosX,BirdPosY )
   --love.graphics.rectangle("fill", BirdPosX, BirdPosY, BirdWidth, BirdHeight)
   
   
   if win == true and inGame == true and inPause == false then
     
-    love.graphics.setColor(1, 1, 1, 1)
     love.graphics.draw(Win, 150,150 )
     
   end
   
   if inPause == true and inGame == true and win == false then 
     
-    love.graphics.setColor(1, 1, 1, 1)
     love.graphics.draw(Pause, 150,150 )
+    
   end
   
   if inGame == false then
     
-    love.graphics.setColor(1, 1, 1, 1)
     love.graphics.draw(Menu, -100, 0)
     
   end
